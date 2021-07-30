@@ -1,4 +1,7 @@
 @extends('layout')
+@section('sidebar')
+@include('pages.include.sidebar')
+@endsection
 @section('content')
 <div class="features_items">
        

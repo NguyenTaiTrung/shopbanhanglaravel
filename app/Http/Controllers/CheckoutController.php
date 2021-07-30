@@ -26,7 +26,7 @@ use Mail;
 class CheckoutController extends Controller
 {
  public function confirm_order(Request $request){
-          $data = $request->all();
+    $data = $request->all();
     //get coupon
     if($data['order_coupon']!='no'){
      $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
@@ -133,6 +133,7 @@ class CheckoutController extends Controller
       $message->to($data['email'])->subject($title_mail);//send this mail with subject
       $message->from($data['email'],$title_mail);//send from this mail
   });
+  
   Session::forget('coupon');
   Session::forget('fee');
   Session::forget('cart');
@@ -154,7 +155,7 @@ class CheckoutController extends Controller
     public function calculate_fee(Request $request){
         $data = $request->all();
         if($data['matp']){
-            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
+            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->get();
             if($feeship){
                 $count_feeship = $feeship->count();
                 if($count_feeship>0){
@@ -351,6 +352,7 @@ class CheckoutController extends Controller
         Session::put('customer_id',$result->customer_id);
         return Redirect::to('/checkout');
       }else{
+        Session::put('messages','Mật khẩu hoặc tài khoản bị sai.Làm ơn nhập lại');
         return Redirect::to('/dang-nhap');
       }
         Session::save();

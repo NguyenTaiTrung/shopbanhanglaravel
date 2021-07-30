@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+@section('content_category')
 <div class="table-agile-info">
   
   <div class="panel panel-default">

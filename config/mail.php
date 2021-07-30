@@ -16,14 +16,14 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+     'driver' => env('MAIL_DRIVER', 'smtp'),
 
     // 'stream' => [
     // 'ssl' => [
     //     'allow_self_signed' => true,
     //     'verify_peer' => false,
     //     'verify_peer_name' => false,
-    // ],
+    //],
     //],
 
 
@@ -65,8 +65,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'trung99001@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Guimakhuyenmai'),
+        'address' => env('MAIL_FROM_ADDRESS', 'trung011999test@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Guimail'),
     ],
 
     /*
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    'sendmail' => '/usr/sbin/sendmail -t',
 
     /*
     |--------------------------------------------------------------------------

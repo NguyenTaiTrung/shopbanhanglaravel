@@ -1,6 +1,17 @@
 @extends('layout')
+@section('slider')
+@include('pages.include.slider')
+
+@endsection
 @section('content')
 @foreach($product_details as $key => $value)
+
+ <input type="hidden" id="product_viewed_id" value="{{$value->product_id}}">
+
+ <input type="hidden" id="viewed_productname{{$value->product_id}}" value="{{$value->product_name}}">
+ <input type="hidden" id="viewed_producturl{{$value->product_id}}" value="{{url('/chi-tiet/'.$value->product_slug)}}">
+ <input type="hidden" id="viewed_productimage{{$value->product_id}}" value="{{asset('public/uploads/product/'.$value->product_image)}}">
+ <input type="hidden" id="viewed_productprice{{$value->product_id}}" value="{{number_format($value->product_price,0,',','.')}}VND">
 <div class="product-details"><!--product-details-->
 	<style type="text/css">
 							.lSSlideOuter .lSPager.lSGallery img {
@@ -17,6 +28,7 @@
 						    <li class="breadcrumb-item"><a href="{{url('/')}}">Trang chủ</a></li>
 						    <li class="breadcrumb-item"><a href="{{url('/danh-muc/'.$cate_slug)}}">{{$product_cate}}</a></li>
 						    <li class="breadcrumb-item active" aria-current="page">{{$meta_title}}</li>
+						     <li class="breadcrumb-item active" aria-current="page">Lượt Xem:{{$value->product_views}}</li>
 						    
 						    <li> <div class="fb-share-button" data-href="{{$url_canonical}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div></li>
 						  </ol>
@@ -108,7 +120,7 @@
 							</ul>
 						</div>
 						<div class="tab-content">
-							<div class="tab-pane fade active in" id="details" >
+							<div class="tab-pane " id="details" >
 								<p>{!!$value->product_desc!!}</p>
 								
 							</div>
@@ -119,18 +131,31 @@
 						
 							</div>
 							
-							<div class="tab-pane fade" id="reviews" >
+							<div class="tab-pane fade active in" id="reviews" >
 								<div class="col-sm-12">
 									<ul>
-										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+										<li><a href=""><i class="fa fa-user"></i>Admin</a></li>
 										<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+										<li><a href=""><i class="fa fa-calendar-o"></i>16.09.2020</a></li>
 									</ul>
+									<style type="text/css">
+										.style_comment {
+										    border: 1px solid #ddd;
+										    border-radius: 10px;
+										    background: #F0F0E9;
+										}
+									</style>
+									<form>
+										 @csrf
+										<input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$value->product_id}}">
+										 <div id="comment_show"></div>
+									
+									</form>
 									
 									<p><b>Viết đánh giá của bạn</b></p>
 
 									 <!------Rating here---------->
-                                                <ul class="list-inline rating"  title="Đánh giá sao sản phẩm">
+                                                <ul class="list-inline rating"  title="Average Rating">
                                                 	@for($count=1; $count<=5; $count++)
                                                 		@php
 	                                                		if($count<=$rating){
@@ -146,16 +171,42 @@
                                                     @endfor
 
                                                 </ul>
+                                                {{-- <ul class="list-inline"  title="Average Rating">
+                                                	@for($count=1; $count<=5; $count++)
+                                                		@php
+	                                                		if($count<=$rating){
+	                                                			$color = 'color:#ffcc00;';
+	                                                		}
+	                                                		else {
+	                                                			$color = 'color:#ccc;';
+	                                                		}
+	                                                	
+                                                		@endphp
+                                                	  <li title="đánh giá sao" 
+                                                	  id="{{$value->product_id}}-{{$count}}" 
+                                                	  data-index="{{$count}}"  
+                                                	  data-product_id="{{$value->product_id}}" 
+                                                	  data-rating="{{$rating}}" 
+                                                	  class="rating" 
+                                                	  style="cursor:pointer; {{$color}} font-size:30px;">
+                                                	  &#9733;
+                                                	</li>
+                                                	@endfor
+                                                </ul> --}}
+
+                                             
 									<form action="#">
 										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
+											<input style="width:100%;margin-left: 0" type="text" class="comment_name" placeholder="Tên bình luận"/>
+												
 										</span>
-										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-										<button type="button" class="btn btn-default pull-right">
-											Submit
+										<textarea name="comment" class="comment_content" placeholder="Nội dung bình luận"></textarea>
+										<div id="notify_comment"></div>
+										
+										<button type="button" class="btn btn-default pull-right send-comment">
+											Gửi bình luận
 										</button>
+
 									</form>
 								</div>
 							</div>

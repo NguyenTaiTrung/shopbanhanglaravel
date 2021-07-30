@@ -1,5 +1,9 @@
 @extends('layout')
-@section('content')
+@section('slider')
+@include('pages.include.slider')
+
+@endsection
+@section('content_category')
 <div class="features_items"><!--features_items-->
                        
                         @foreach($category_name as $key => $name)
@@ -9,7 +13,7 @@
                         @endforeach
                         @foreach($category_by_id as $key => $product)
                         <a href="{{URL::to('/chi-tiet/'.$product->product_slug)}}">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                              <div class="product-image-wrapper">
                            
                                 <div class="single-products">

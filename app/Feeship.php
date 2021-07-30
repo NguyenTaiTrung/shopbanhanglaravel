@@ -18,7 +18,5 @@ class Feeship extends Model
      public function province(){
     	return $this->belongsTo('App\Province', 'fee_maqh');
     }
-     public function wards(){
-    	return $this->belongsTo('App\Wards','fee_xaid');
-    }
+     
 }

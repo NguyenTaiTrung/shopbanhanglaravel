@@ -245,4 +245,41 @@ class CartController extends Controller
         Cart::update($rowId,$qty);
         return Redirect::to('/show-cart');
     }
+    public function show_cart_menu(){
+        $cart = count(Session::get('cart'));
+        $output = '';
+        $output.=' <span class="badges">'.$cart.'</span>';
+        echo $output;
+    }
+    public function hover_cart(){
+        //{{asset('public/uploads/product/PS59.jpg')}}
+        //{{url('/del-product/'.$cart['session_id'])}}
+        $cart = count(Session::get('cart'));
+        $output = '';
+        if($cart>0){
+            
+          $output.=' <ul class="hover-cart">';
+          foreach(Session::get('cart') as $key => $value){
+                                    $output.='<li>
+                                       <a href="">
+                                           <img src="'.asset('public/uploads/product/'.$value['product_image']).'" >
+
+                                           <p>'.number_format($value['product_price'],0,',','.').'vnd</p>
+                                           <p>Số lượng :'.$value['product_qty'].'</p>
+                                       </a>
+                                       <a class="cart_quantity_delete" href="'.url('/del-product/'.$value['session_id']).'"><i class="fa fa-times"></i></a>
+                                   </li>';
+                               }
+                              $output.='</ul>';
+
+        }else{
+            $output.=' <ul class="hover-cart">
+                                   <li>
+                                       <p>Giỏ hàng trống</p>
+                                   </li>';
+
+        }
+      
+        echo $output;
+    }
 }

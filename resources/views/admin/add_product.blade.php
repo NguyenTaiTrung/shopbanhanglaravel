@@ -18,7 +18,7 @@
                             <div class="position-center">
                                 <form role="form" action="{{URL::to('/save-product')}}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    {{ csrf_field() }}
+                                   
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên sản phẩm</label>
                                     <input type="text" data-validation="length" data-validation-length="min10" data-validation-error-msg="Làm ơn điền ít nhất 10 ký tự" name="product_name" class="form-control " id="slug" placeholder="Tên danh mục" onkeyup="ChangeToSlug();"> 
@@ -56,7 +56,14 @@
                                     <label for="exampleInputPassword1">Danh mục sản phẩm</label>
                                       <select name="product_cate" class="form-control input-sm m-bot15">
                                         @foreach($cate_product as $key => $cate)
+                                            @if($cate->category_parent==0)
                                             <option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+                                            @foreach($cate_product as $key => $cate_sub)
+                                            @if($cate_sub->category_parent!=0 &&  $cate_sub->category_parent==$cate->category_id)
+                                            <option style="color: red" value="{{$cate_sub->category_id}}">---{{$cate_sub->category_name}}</option>
+                                            @endif
+                                            @endforeach
+                                            @endif
                                         @endforeach
                                             
                                     </select>

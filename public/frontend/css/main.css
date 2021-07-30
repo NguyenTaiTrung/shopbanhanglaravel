@@ -200,7 +200,7 @@ a#scrollUp i{
 
 
 .shop-menu ul li a {
-  background: #FFFFFF;
+  
   color: #696763;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -218,7 +218,7 @@ a#scrollUp i{
 
 .shop-menu ul li a:hover {
 	color:#fe980f;
-	background:#fff;
+
 }
 
 
@@ -1534,6 +1534,8 @@ h2.title {
 
 .breadcrumbs {
   position: relative;
+  width: 1000px;
+  
 }
 
 .breadcrumbs .breadcrumb {
@@ -1567,7 +1569,10 @@ h2.title {
 
 #cart_items .cart_info {
   border: 1px solid #E6E4DF;
-  margin-bottom: 50px
+  margin-bottom: 50px;
+  width: 1000px;;
+  
+
 }
 
 
@@ -2526,4 +2531,37 @@ h2.title {
   color: #FE980F;
 }
 
-
+span.badges{
+  background: red;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+li.cart-hover:hover .hover-cart {
+  display: inherit;
+}
+.shop-menu .hover-cart {
+    display: inline-grid;
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    padding: 0;
+   
+    background: bisque;
+}
+ul.hover-cart li{
+  padding: 10px;
+  border-bottom: 1px solid #000;
+}
+ul.hover-cart li img{
+ display: block;
+ margin: 0 auto;
+ width: 70px;
+ height: 70px;
+ 
+}
+li.cart-hover {
+    position: relative;
+}

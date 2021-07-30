@@ -10,6 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Thay doi ngon ngu
+Route::get('lang/{locale}',function($locale){
+if(! in_array($locale,['en','vi','cn'])){
+	abort(404);
+
+   }
+   session()->put('locale',$locale);
+   return redirect()->back();
+});
+
 //Frontend 
 Route::get('/','HomeController@index' );
 Route::get('/trang-chu','HomeController@index');
@@ -26,6 +37,13 @@ Route::get('/tag/{product_tag}','ProductController@tag');
 Route::post('/insert-rating','ProductController@insert_rating');
 Route::post('/uploads-ckeditor','ProductController@ckeditor_image');
 Route::get('/file-browser','ProductController@file_browser');
+Route::post('/load-comment','ProductController@load_comment');
+Route::post('/send-comment','ProductController@send_comment');
+Route::get('/comment','ProductController@list_comment');
+Route::post('/allow-comment','ProductController@allow_comment');
+Route::post('/reply-comment','ProductController@reply_comment');
+
+
 //Bai viet
 Route::get('/danh-muc-bai-viet/{post_slug}','PostController@danh_muc_bai_viet');
 Route::get('/bai-viet/{post_slug}','PostController@bai_viet');
@@ -133,7 +151,8 @@ Route::get('/gio-hang','CartController@gio_hang');
 Route::get('/delete-to-cart/{rowId}','CartController@delete_to_cart');
 Route::get('/del-product/{session_id}','CartController@delete_product');
 Route::get('/del-all-product','CartController@delete_all_product');
-
+Route::get('/show-cart','CartController@show_cart_menu');
+Route::get('hover-cart','CartController@hover_cart');
 //Checkout
 Route::get('/dang-nhap','CheckoutController@login_checkout');
 Route::get('/del-fee','CheckoutController@del_fee');
@@ -151,13 +170,14 @@ Route::post('/confirm-order','CheckoutController@confirm_order');
 
 //Order
 
-Route::get('/print-order/{checkout_code}','OrderController@print_order')->middleware('author.roles');
+Route::get('/print-order/{checkout_code}','OrderController@print_order');
 Route::get('/manage-order','OrderController@manage_order')->middleware('author.roles');
 Route::get('/view-order/{order_code}','OrderController@view_order')->middleware('author.roles');
 Route::post('/update-order-qty','OrderController@update_order_qty')->middleware('author.roles');
 Route::post('/update-qty','OrderController@update_qty')->middleware('author.roles');
 Route::get('/history','OrderController@history');
 Route::get('/view-history-order/{order_code}','OrderController@view_history_order');
+Route::post('/huy-don-hang','OrderController@huy_don_hang');
 
 //Delivery
 Route::get('/delivery','DeliveryController@delivery')->middleware('author.roles');
@@ -200,7 +220,7 @@ Route::post('update-gallery','GalleryController@update_gallery')->middleware('au
 
 //Video
 Route::get('video','VideoController@video')->middleware('user.roles');
-Route::get('video-shop','VideoController@video_shop')->middleware('user.roles');
+Route::get('video-shop','VideoController@video_shop');
 Route::post('select-video','VideoController@select_video')->middleware('user.roles');
 Route::post('insert-video','VideoController@insert_video')->middleware('user.roles');
 Route::post('update-video','VideoController@update_video')->middleware('user.roles');

@@ -120,7 +120,7 @@
             </td>
             <td>
 
-                {{--  <p><a href="{{url('/send-coupon-vip', [ 
+              <!--  <p><a href="{{url('/send-coupon-vip', [ 
 
             'coupon_time'=> $cou->coupon_time,
             'coupon_condition'=> $cou->coupon_condition,
@@ -128,7 +128,7 @@
             'coupon_code'=> $cou->coupon_code
 
 
-          ])}}" class="btn btn-primary" style="margin:5px 0;">Gửi giảm giá khách vip</a></p>   --}}  
+          ])}}" class="btn btn-primary" style="margin:5px 0;">Gửi giảm giá khách vip</a></p>   --> 
           <p><a href="{{url('/send-coupon',[ 
 
            

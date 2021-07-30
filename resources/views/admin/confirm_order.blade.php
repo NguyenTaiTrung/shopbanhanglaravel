@@ -9,11 +9,11 @@
 
 </head>
 <body>
-	<div class="container" style="border-radius: 12px;padding:15px;">
+	<div class="container" style="background: #222;border-radius: 12px;padding:15px;">
 		<div class="col-md-12" >
 
 			<p style="text-align: center;color: #fff">Đây là email tự động. Quý khách vui lòng không trả lời email này.</p>
-			<div class="row" style="padding: 15px">
+			<div class="row" style="background: cadetblue;padding: 15px">
 
 				
 				<div class="col-md-6" style="text-align: center;color: #fff;font-weight: bold;font-size: 30px">
@@ -127,7 +127,7 @@
 
 				</div>
 				<p style="color:#fff;text-align: center;font-size: 15px;">Xem lại lịch sử đơn hàng đã đặt tại : <a target="_blank" href="{{url('/history')}}">lịch sử đơn hàng của bạn</a></p>
-				<p style="color:#fff;text-align: center;font-size: 15px;">Mọi chi tiết xin liên hệ website tại : <a target="_blank" href="http://shopbandodientu.com/">Shop</a>, hoặc liên hệ qua số hotline : 0397673462.Xin cảm ơn quý khách đã đặt hàng shop chúng tôi.</p>
+				<p style="color:#fff;text-align: center;font-size: 15px;">Mọi chi tiết xin liên hệ website tại : <a target="_blank" href="http://dodientu.store/">Shop</a>, hoặc liên hệ qua số hotline : 0397673462.Xin cảm ơn quý khách đã đặt hàng shop chúng tôi.</p>
 
 			</div>
 		</div>

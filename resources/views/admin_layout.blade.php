@@ -121,7 +121,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a href="{{URL::to('/add-slider')}}">Thêm slider</a></li>
                     </ul>
                 </li>
-                      @endhasrole
+                @endhasrole
+                 @hasrole(['user','admin'])
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Bình luận</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{URL::to('/comment')}}">Liệt kê bình luận</a></li>
+                    </ul>
+                </li>
+                   @endhasrole
                 @hasrole(['author','admin'])
                  <li class="sub-menu">
                     <a href="javascript:;">
@@ -292,9 +303,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/backend/js/simple.money.format.js')}}"></script>
  <script src="{{asset('public/backend/js/jquery-ui.js')}}"></script>
+<script type="text/javascript">
+    $('.comment_duyet_btn').click(function(){
+        var comment_status = $(this).data('comment_status');
 
+        var comment_id = $(this).data('comment_id');
+        var comment_product_id = $(this).attr('id');
+        if(comment_status==0){
+            var alert = 'Thay đổi thành duyệt thành công';
+        }else{
+            var alert = 'Thay đổi thành không duyệt thành công';
+        }
+          $.ajax({
+                url:"{{url('/allow-comment')}}",
+                method:"POST",
+
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{comment_status:comment_status,comment_id:comment_id,comment_product_id:comment_product_id},
+                success:function(data){
+                    location.reload();
+                   $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>');
+
+                }
+            });
+
+
+    });
+    $('.btn-reply-comment').click(function(){
+        var comment_id = $(this).data('comment_id');
+        var comment = $('.reply_comment_'+comment_id).val();
+        var comment_product_id = $(this).data('product_id');
+          $.ajax({
+                url:"{{url('/reply-comment')}}",
+                method:"POST",
+
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{comment:comment,comment_id:comment_id,comment_product_id:comment_product_id},
+                success:function(data){
+                    $('.reply_comment_'+comment_id).val('');
+                   $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+
+                }
+            });
+
+
+    });
+</script>
  <script type="text/javascript">
-   
   $( function() {
     $( "#start_coupon" ).datepicker({
         prevText:"Tháng trước",
@@ -854,14 +913,13 @@ $(document).ready(function(){
 
            var city = $('.city').val();
            var province = $('.province').val();
-           var wards = $('.wards').val();
            var fee_ship = $('.fee_ship').val();
             var _token = $('input[name="_token"]').val();
            
             $.ajax({
                 url : '{{url('/insert-delivery')}}',
                 method: 'POST',
-                data:{city:city, province:province, wards:wards, fee_ship:fee_ship, _token:_token},
+                data:{city:city, province:province, fee_ship:fee_ship, _token:_token},
                 success:function(data){
                    fetch_delivery();
                 }
@@ -880,8 +938,6 @@ $(document).ready(function(){
 
             if(action=='city'){
                 result = 'province';
-            }else{
-                result = 'wards';
             }
             $.ajax({
                 url : '{{url('/select-delivery')}}',

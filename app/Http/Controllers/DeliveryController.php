@@ -35,7 +35,6 @@ class DeliveryController extends Controller
           <tr>
             <th>Tên thành phố</th>
             <th>Tên quận huyện</th> 
-            <th>Tên xã phường</th>
             <th>Phí ship</th>
           </tr>  
         </thread>
@@ -48,7 +47,6 @@ class DeliveryController extends Controller
           <tr>
            <td>'.$fee->city->name_city.'</td>
             <td>'.$fee->province->name_quanhuyen.'</td>
-            <td>'.$fee->wards->name_xaphuong.'</td>
             <td contenteditable data-feeship_id="'.$fee->fee_id.'" class="fee_feeship_edit">'.number_format($fee->fee_feeship,0,',','.').'</td>
           </tr>
           ';
@@ -64,67 +62,12 @@ class DeliveryController extends Controller
     
   }
   
- /* public function select_feeship(){
-    $feeship = Feeship::orderBy('fee_id','DESC')->get();
-      $feeship_count = $feeship->count();
-      $output = ' <form>
-              '.csrf_field().'
-            <table class="table table-striped b-t b-light">
-                  <thead>
-                    <tr>
-            <th>Tên thành phố</th>
-            <th>Tên quận huyện</th> 
-            <th>Tên xã phường</th>
-            <th>Phí ship</th>
-          </tr>  
-                  </thead>
-                  <tbody>
 
-      ';
-      if($feeship_count>0){
-        $i = 0;
-        foreach($feeship as $key => $fee){
-          $i++;
-          $output.='
-
-             <tr>
-           <td>'.$fee->user->name_city.'</td>
-            <td>'.$fee->province->name_quanhuyen.'</td>
-            <td>'.$fee->wards->name_xaphuong.'</td>
-            <td contenteditable data-feeship_id="'.$fee->fee_id.'" class="fee_feeship_edit">'.number_format($fee->fee_feeship,0,',','.').'</td>
-          </tr>
-                                    
-
-
-
-          ';
-        }
-      }else{ 
-        $output.='
-             <tr>
-                                        <td colspan="4">Chưa có phi van chuyen nao</td>
-                                       
-                                      </tr>
-
-
-          ';
-
-      }
-      $output.='
-             </tbody>
-             </table>
-             </form>
-
-
-          ';
-      echo $output;
-  }*/
   public function insert_delivery(Request $request){
     $data = $request->all();
     $fee_ship = new Feeship();
     $fee_ship->fee_matp = $data['city'];
     $fee_ship->fee_maqh = $data['province'];
-    $fee_ship->fee_xaid = $data['wards'];
     $fee_ship->fee_feeship = $data['fee_ship'];
     $fee_ship->save();
   }

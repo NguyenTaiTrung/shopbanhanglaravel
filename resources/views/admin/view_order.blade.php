@@ -189,7 +189,7 @@
               @php
               $total_after_coupon = ($total*$coupon_number)/100;
               echo 'Tổng giảm :'.number_format($total_after_coupon,0,',','.').'</br>';
-              $total_coupon = $total + $details->product_feeship - $total_after_coupon ;
+              $total_coupon = $total + $details->product_feeship - $total_after_coupon;
               @endphp
               @else 
               @php

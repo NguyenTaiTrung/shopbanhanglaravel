@@ -1,5 +1,5 @@
 @extends('layout')
-@section('content')
+@section('content_category')
 <style type="text/css">
   .baiviet ul li {
     padding: 2px;
@@ -27,6 +27,7 @@
                        
                       	 	<div class="product-image-wrapper" style="border: none;">
                             @foreach($post_by_id as $key => $p)
+                            <p target="_blank" href="#"><span style="color:black">Lượt xem:{{$p->post_views}}</span></p>
                                 <div class="single-products" style="margin:10px 0;padding: 2px">
                                      {!!$p->post_content!!}
                                      

@@ -37,12 +37,7 @@
                                            
                                     </select>
                                 </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn xã phường</label>
-                                      <select name="wards" id="wards" class="form-control input-sm m-bot15 wards">
-                                            <option value="">--Chọn xã phường--</option>   
-                                    </select>
-                                </div>
+                                  
                                  <div class="form-group">
                                     <label for="exampleInputEmail1">Phí vận chuyển</label>
                                     <input type="text" name="fee_ship" class="form-control fee_ship" id="exampleInputEmail1" placeholder="Tên danh mục">

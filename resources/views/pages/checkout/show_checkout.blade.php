@@ -1,4 +1,7 @@
 @extends('layout')
+@section('sidebar')
+@include('pages.include.sidebar')
+@endsection
 @section('content')
 
 <section id="cart_items">
@@ -23,16 +26,16 @@
 							<div class="form-one">
 								<form method="POST">
 									@csrf
-									<input type="text" name="shipping_email" class="shipping_email" placeholder="Điền email">
-									<input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên người gửi">
-									<input type="text" name="shipping_address" class="shipping_address" placeholder="Địa chỉ gửi hàng">
-									<input type="text" name="shipping_phone" class="shipping_phone" placeholder="Số điện thoại">
-									<textarea name="shipping_notes" class="shipping_notes" placeholder="Ghi chú đơn hàng của bạn" rows="5"></textarea>
+									<input type="text" name="shipping_email" class="shipping_email" placeholder="Điền email (Không được để trống!!)">
+									<input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên người gửi (Không được để trống!!)">
+									<input type="text" name="shipping_address" class="shipping_address" placeholder="Địa chỉ gửi hàng (Không được để trống!!)">
+									<input type="text" name="shipping_phone" class="shipping_phone" placeholder="Số điện thoại (Không được để trống!!)">
+									<textarea name="shipping_notes" class="shipping_notes" placeholder="Ghi chú đơn hàng của bạn (Không được để trống!!)" rows="5"></textarea>
 									
 									@if(Session::get('fee'))
 										<input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
 									@else 
-										<input type="hidden" name="order_fee" class="order_fee" value="10000">
+										<input type="hidden" name="order_fee" class="order_fee" value="25000">
 									@endif
 
 									@if(Session::get('coupon'))
@@ -49,12 +52,15 @@
 										 <div class="form-group">
 		                                    <label for="exampleInputPassword1">Chọn hình thức thanh toán</label>
 		                                      <select name="payment_select"  class="form-control input-sm m-bot15 payment_select">
+		                                      	    <option value="1">Tiền mặt</option>   
 		                                            <option value="0">Qua chuyển khoản</option>
-		                                            <option value="1">Tiền mặt</option>   
+		                                            
 		                                    </select>
 		                                </div>
 									</div>
+									
 									<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
+									
 								</form>
 								<form>
                                     @csrf 
@@ -77,12 +83,7 @@
                                            
                                     </select>
                                 </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn xã phường</label>
-                                      <select name="wards" id="wards" class="form-control input-sm m-bot15 wards">
-                                            <option value="">--Chọn xã phường--</option>   
-                                    </select>
-                                </div>
+                                 
                                
                                
                               	<input type="button" value="Tính phí vận chuyển" name="calculate_order" class="btn btn-primary btn-sm calculate_delivery">
@@ -237,6 +238,13 @@
 										@endphp
 										</li>
 										
+										<div class="col-md-12">
+											@php
+											$vnd_to_usd = $total_after/23012;
+											@endphp
+											<div id="paypal-button"></div>
+											<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd,2)}}">
+										</div>
 									</td>
 									</tr>
 									@else 
